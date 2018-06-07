@@ -1,0 +1,12 @@
+{
+  "Google": {
+    "project": {
+      "id": "mpurusottamc-playground"
+    },
+    "logger": {
+      "type": "global",
+      "name": "demo-log",
+      "enabled": false
+    }
+  }
+}

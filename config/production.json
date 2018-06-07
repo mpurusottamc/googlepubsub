@@ -1,0 +1,8 @@
+{
+  "Google": {
+    "logger": {
+      "name": "demo-log",
+      "enabled": false
+    }
+  }
+}

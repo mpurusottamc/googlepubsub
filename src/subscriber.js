@@ -40,7 +40,7 @@ function Subscriber(config, logger) {
 
         self.logger.log({
             status: 'processing',
-            message: `received a message for processing ${JSON.stringify(message.data)}`
+            message: `received a message for processing ${message.data}`
         });
 
         message.ack();

@@ -63,7 +63,7 @@ app.route('/:topic/publish').post((req, res) => {
         project: config.Google.project
     }, logger);
 
-    publisher.publishMessage(req.params.topic, message).then(() => {
+    publisher.publishMessage(message, req.params.topic).then(() => {
         console.log(`published message successfully`);
 
         res.status(200).send({

@@ -1,8 +1,8 @@
 {
-  "Google": {
-    "logger": {
-      "name": "demo-log",
-      "enabled": false
+    "Google": {
+        "logger": {
+            "name": "demo-log-prod",
+            "enabled": true
+        }
     }
-  }
 }

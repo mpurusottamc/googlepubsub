@@ -31,10 +31,10 @@ function Logger(config) {
 
             self.logger.write(entry)
                 .then(() => {
-                    //console.log(`Logged the message to Google Cloud Logs`);
+                    // console.log(`Logged the message to Google Cloud Logs`);
                 })
                 .catch(err => {
-                    //console.error('ERROR:', err);
+                    // console.error('ERROR:', err);
                 });
         } else {
             console.log(`${new Date()} - ${JSON.stringify(message)}`);

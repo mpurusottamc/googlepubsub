@@ -18,7 +18,6 @@ const config = require('config');
 console.log(`Configuration: ${JSON.stringify(config)}`);
 
 const Logger = require('./logger');
-const Pubsub = require('./pubsub');
 const Publisher = require('./publisher');
 const Subscriber = require('./subscriber');
 
@@ -60,7 +59,8 @@ app.route('/:topic/publish').post((req, res) => {
     const message = req.body;
 
     const publisher = new Publisher({
-        project: config.Google.project
+        project: config.Google.project,
+        pubsub: config.Google.pubsub
     }, logger);
 
     publisher.publishMessage(message, req.params.topic).then(() => {
@@ -78,7 +78,8 @@ app.route('/:topic/publish').post((req, res) => {
 
 app.route('/:subscription/subscribe').get((req, res) => {
     const subscriber = new Subscriber({
-        project: config.Google.project
+        project: config.Google.project,
+        pubsub: config.Google.pubsub
     }, logger);
 
     subscriber.attachListener(req.params.subscription);

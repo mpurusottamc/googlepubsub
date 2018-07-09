@@ -77,6 +77,8 @@ function PubSub(config, logger) {
             }
         });
 
+        subscription.ackDeadline = self._config.pubsub.messageAckTimeInSeconds * 1000;
+
         // Listen for new messages until timeout is hit
         subscription.on(`message`, messageHandler);
         subscription.on(`error`, errorHandler);

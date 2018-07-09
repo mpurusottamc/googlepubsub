@@ -15,7 +15,8 @@ function Publisher(config, logger) {
         self.logger = logger;
 
         self.pubsub = new PubSub({
-            project: self._config.project
+            project: self._config.project,
+            pubsub: config.Google.pubsub
         }, self.logger);
     }
 

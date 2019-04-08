@@ -44,8 +44,14 @@ function Subscriber(config, logger) {
             message: `received a message for processing ${message.data}`
         });
 
-        message.ack();
-        console.log(`message acknowledged`);
+        const data = JSON.parse(message.data);
+        console.log(`timeout: ${data.timeout}`);
+
+        setTimeout(function() {
+            message.ack();
+
+            console.log(`message acknowledged`);
+        }, data.timeout);
     }
 
     self.init(config, logger);

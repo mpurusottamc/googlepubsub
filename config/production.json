@@ -1,8 +1,12 @@
 {
-    "Google": {
-        "logger": {
-            "name": "demo-log-prod",
-            "enabled": true
-        }
-    }
+	"Google": {
+		"project": {
+			"id": "cloudanix-app"
+		},
+		"logger": {
+			"type": "global",
+			"name": "speedsterlog-dev",
+			"enabled": true
+		}
+	}
 }

@@ -5,58 +5,56 @@ const Logger = require('./logger');
 const PubSub = require('./pubsub');
 
 function Subscriber(config, logger) {
-    let self = {};
+	let self = {};
 
-    self._config = {};
+	self.init = function (config, logger) {
+		self.config = config;
+		self.logger = logger;
 
-    self.init = function(config, logger) {
-        self._config = _.merge(self._config, config);
+		self.pubsub = new PubSub({
+			project: self.config.project,
+			pubsub: self.config.pubsub
+		}, self.logger);
+	}
 
-        self.logger = logger;
+	self.attachListener = function (subscription) {
+		self.subscription = subscription;
+		self.pubsub.subscribe(subscription, self.messageHandler, self.errorHandler);
+	}
 
-        self.pubsub = new PubSub({
-            project: self._config.project,
-            pubsub: config.Google.pubsub
-        }, self.logger);
-    }
+	self.errorHandler = function (error) {
+		console.error(`ERROR: ${error} - ${error.stack}`);
 
-    self.attachListener = function(subscription) {
-        self.subscription = subscription;
-        self.pubsub.subscribe(subscription, self.messageHandler, self.errorHandler);
-    }
+		console.log(`reattaching listener to subscription - ${self.subscription}`);
 
-    self.errorHandler = function(error) {
-        console.error(`ERROR: ${error} - ${error.stack}`);
+		// Reattach after couple of seconds - 5
+		self.attachListener(self.subscription);
+	}
 
-        console.log(`reattaching listener to subscription - ${self.subscription}`);
+	self.messageHandler = function (message) {
+		console.log(`Received a message for processing ${message.id}:`);
+		console.log(`\tData: ${message.data}`);
+		console.log(`\tAttributes: ${JSON.stringify(message.attributes)}`);
 
-        // Reattach after couple of seconds - 5
-        self.attachListener(self.subscription);
-    }
+		self.logger.log({
+			status: 'processing',
+			message: `received a message for processing ${message.data}`
+		});
 
-    self.messageHandler = function(message) {
-        console.log(`Received a message for processing ${message.id}:`);
-        console.log(`\tData: ${message.data}`);
-        console.log(`\tAttributes: ${JSON.stringify(message.attributes)}`);
+		const data = JSON.parse(message.data);
+		console.log(`timeout: ${data.timeout}`);
 
-        self.logger.log({
-            status: 'processing',
-            message: `received a message for processing ${message.data}`
-        });
+		let timeout = data.timeout ? data.timeout : 1000;
+		setTimeout(function () {
+			message.ack();
 
-        const data = JSON.parse(message.data);
-        console.log(`timeout: ${data.timeout}`);
+			console.log(`message acknowledged`);
+		}, data.timeout);
+	}
 
-        setTimeout(function() {
-            message.ack();
+	self.init(config, logger);
 
-            console.log(`message acknowledged`);
-        }, data.timeout);
-    }
-
-    self.init(config, logger);
-
-    return self;
+	return self;
 }
 
 module.exports = Subscriber;

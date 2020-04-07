@@ -1,25 +1,25 @@
 {
-    "name": "googlepubsub",
-    "version": "1.0.0",
-    "description": "Publisher and Subscriber for Google Pub/Sub",
-    "main": "./src/main.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "export NODE_ENV='development' && nodemon ./src/index.js",
-        "prod": "export NODE_ENV='production' && nodemon ./src/index.js"
-    },
-    "author": "Purusottam Mupunu",
-    "license": "ISC",
-    "dependencies": {
-        "@google-cloud/logging": "^1.2.0",
-        "@google-cloud/pubsub": "^0.18.0",
-        "body-parser": "^1.18.3",
-        "config": "^1.30.0",
-        "dotenv": "^6.0.0",
-        "express": "^4.16.3",
-        "lodash": "^4.17.13"
-    },
-    "devDependencies": {
-        "nodemon": "^1.19.0"
-    }
+	"name": "googlepubsub",
+	"version": "1.0.0",
+	"description": "Publisher and Subscriber for Google Pub/Sub",
+	"main": "./src/main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "export NODE_ENV='development' && nodemon ./src/index.js",
+		"prod": "export NODE_ENV='production' && nodemon ./src/index.js"
+	},
+	"author": "Purusottam Mupunu",
+	"license": "ISC",
+	"dependencies": {
+		"@google-cloud/logging": "^7.3.0",
+		"@google-cloud/pubsub": "^1.7.1",
+		"body-parser": "^1.19.0",
+		"config": "^3.3.1",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"lodash": "^4.17.15"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.2"
+	}
 }

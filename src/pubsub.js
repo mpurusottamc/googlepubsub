@@ -87,11 +87,11 @@ function PubSubClient(config, logger) {
 		subscription.on(`message`, messageHandler);
 		subscription.on(`error`, errorHandler);
 
-		console.log(`attached listener to pubsub`);
+		console.log(`attached listener to pubsub: ${subscriptionName}`);
 
 		self.logger.log({
 			status: 'init',
-			message: `attached listener to pubsub`,
+			message: `attached listener to pubsub: ${subscriptionName}`,
 		});
 	};
 
